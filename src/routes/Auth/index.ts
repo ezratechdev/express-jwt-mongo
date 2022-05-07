@@ -50,7 +50,7 @@ AuthRouter.post('/login' , [jwtKeyMiddleWare], eah( async (req:any , res:any)=>{
     throw new Error(`Data sent is invalid.Check and try again`);
 
     // check if user is present
-    const DoesThisUSerExist:any = UserSchema.findOne({email});
+    const DoesThisUSerExist:any = await UserSchema.findOne({email});
     if(!DoesThisUSerExist) throw new Error(`User with email ${email} does not exist.Maybe try signing up`);
 
     if(DoesThisUSerExist && await bcrypt.compare(password , DoesThisUSerExist.password)){
